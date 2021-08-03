@@ -16,6 +16,14 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/kotlin'
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }
