@@ -1,9 +1,6 @@
 package com.djeremy.structure.playgroung.findpattern;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
 
@@ -11,10 +8,10 @@ public class Solution {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Provide entry input");
-        String entry = scanner.nextLine();
+        String entry = scanner.nextLine().toUpperCase(Locale.ROOT);
 
         System.out.println("Provide pattern");
-        String pattern = scanner.nextLine();
+        String pattern = scanner.nextLine().toUpperCase(Locale.ROOT);
 
         int method1 = calculateMethod1(pattern, entry);
         System.out.println("Method1 = " + method1);
