@@ -28,31 +28,31 @@ private fun merge(firstList: Node<Int>, secondList: Node<Int>): Node<Int> {
     // set next as head of extracted element
     // repeat until either of list is empty
 
-    var headOne: Node<Int>? = firstList
-    var headTwo: Node<Int>? = secondList
+    var firstTail: Node<Int>? = firstList
+    var secondTail: Node<Int>? = secondList
     val mergedList: Node<Int> = Node(-1)
-    var mergedHead: Node<Int> = mergedList
+    var mergedTail: Node<Int> = mergedList
 
-    while (headOne != null && headTwo != null) {
-        if (headOne.element < headTwo.element) {
-            mergedHead.next = headOne
-            mergedHead = headOne
+    while (firstTail != null && secondTail != null) {
+        if (firstTail.element < secondTail.element) {
+            mergedTail.next = firstTail
+            mergedTail = firstTail
 
-            headOne = headOne.next
+            firstTail = firstTail.next
         } else {
-            mergedHead.next = headTwo
-            mergedHead = headTwo
+            mergedTail.next = secondTail
+            mergedTail = secondTail
 
-            headTwo = headTwo.next
+            secondTail = secondTail.next
         }
     }
 
-    if (headOne != null) {
-        mergedHead.next = headOne
+    if (firstTail != null) {
+        mergedTail.next = firstTail
     }
 
-    if (headTwo != null) {
-        mergedHead.next = headTwo
+    if (secondTail != null) {
+        mergedTail.next = secondTail
     }
     return mergedList.next!!
 }
