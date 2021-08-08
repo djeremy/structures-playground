@@ -24,6 +24,12 @@ sourceSets {
     }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
 test {
     useJUnitPlatform()
 }
