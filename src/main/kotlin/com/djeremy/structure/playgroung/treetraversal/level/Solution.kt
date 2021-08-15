@@ -1,5 +1,7 @@
 package com.djeremy.structure.playgroung.treetraversal.level
 
+import com.djeremy.structure.playgroung.common.BinaryTreeNode
+import com.djeremy.structure.playgroung.common.build
 import java.util.*
 
 
@@ -10,8 +12,6 @@ fun main() {
         val input = readLine()!!.split(' ').map { it.toInt() }.sorted().toTypedArray()
 
         val treeNode = build(0, input)
-
-        println(treeNode)
 
         levelFirstTraversal(treeNode)
     }
@@ -24,7 +24,7 @@ private fun levelFirstTraversal(root: BinaryTreeNode<Int>) {
     var currentElements: Queue<BinaryTreeNode<Int>> = LinkedList(listOf(root))
 
     while (currentElements.isNotEmpty()) {
-        var swap: Queue<BinaryTreeNode<Int>>? = null
+        var swap: Queue<BinaryTreeNode<Int>>?
         while (currentElements.isNotEmpty()) {
             val currentElement = currentElements.remove()
 
@@ -40,24 +40,3 @@ private fun levelFirstTraversal(root: BinaryTreeNode<Int>) {
         println("------------------")
     }
 }
-
-private fun build(currentIndex: Int, array: Array<Int>): BinaryTreeNode<Int> {
-    val node: BinaryTreeNode<Int> = BinaryTreeNode(array[currentIndex])
-
-    val leftIndex = (currentIndex * 2) + 1
-    val rightIndex = (currentIndex * 2) + 2
-
-    if (leftIndex < array.size) {
-        node.left = build(leftIndex, array)
-    }
-    if (rightIndex < array.size) {
-        node.right = build(rightIndex, array)
-    }
-    return node
-}
-
-private class BinaryTreeNode<T>(
-    val element: T,
-    var left: BinaryTreeNode<T>? = null,
-    var right: BinaryTreeNode<T>? = null
-)
