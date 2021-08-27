@@ -2,7 +2,6 @@ package com.djeremy.structure.playgroung.treetraversal.depth
 
 import com.djeremy.structure.playgroung.common.BinaryTreeNode
 import com.djeremy.structure.playgroung.common.build
-import java.util.*
 
 
 fun main() {
@@ -13,30 +12,20 @@ fun main() {
 
         val treeNode = build(0, input)
 
-        levelFirstTraversal(treeNode)
+        depthFirstTraversal(treeNode)
     }
 }
 
+fun depthFirstTraversal(root: BinaryTreeNode<Int>) {
+    val stack: ArrayList<BinaryTreeNode<Int>> = arrayListOf(root)
+    while (stack.isNotEmpty()) {
+        val currentElement = stack.removeAt(stack.lastIndex)
 
-private fun levelFirstTraversal(root: BinaryTreeNode<Int>) {
+        print(currentElement.element.toString() + " ")
 
-    var nextElements: Queue<BinaryTreeNode<Int>> = LinkedList()
-    var currentElements: Queue<BinaryTreeNode<Int>> = LinkedList(listOf(root))
-
-    while (currentElements.isNotEmpty()) {
-        var swap: Queue<BinaryTreeNode<Int>>?
-        while (currentElements.isNotEmpty()) {
-            val currentElement = currentElements.remove()
-
-            print(currentElement.element.toString() + " ")
-
-            currentElement.left?.let { nextElements.add(it) }
-            currentElement.right?.let { nextElements.add(it) }
-        }
-
-        swap = currentElements
-        currentElements = nextElements
-        nextElements = swap
-        println("------------------")
+        currentElement.right?.let { stack.add(it) }
+        // left should be added after right, in order to leverage stack's properties
+        currentElement.left?.let { stack.add(it) }
     }
 }
+
