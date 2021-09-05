@@ -13,13 +13,13 @@ fun main() {
 
         val treeNode = build(0, input)
 
-        levelFirstTraversal(treeNode)
+        breadthFirstTraversalUsingTwoQueues(treeNode)
     }
 }
 
 
-private fun levelFirstTraversal(root: BinaryTreeNode<Int>) {
-
+fun breadthFirstTraversalUsingTwoQueues(root: BinaryTreeNode<Int>): List<Int> {
+    val result = mutableListOf<Int>()
     var nextElements: Queue<BinaryTreeNode<Int>> = LinkedList()
     var currentElements: Queue<BinaryTreeNode<Int>> = LinkedList(listOf(root))
 
@@ -29,6 +29,7 @@ private fun levelFirstTraversal(root: BinaryTreeNode<Int>) {
             val currentElement = currentElements.remove()
 
             print(currentElement.element.toString() + " ")
+            result.add(currentElement.element)
 
             currentElement.left?.let { nextElements.add(it) }
             currentElement.right?.let { nextElements.add(it) }
@@ -39,4 +40,22 @@ private fun levelFirstTraversal(root: BinaryTreeNode<Int>) {
         nextElements = swap
         println("------------------")
     }
+    return result
+}
+
+fun breadthFirstTraversalUsingOneQueue(root: BinaryTreeNode<Int>): List<Int> {
+    val result = mutableListOf<Int>()
+    var nextElements: Queue<BinaryTreeNode<Int>> = LinkedList(listOf(root))
+
+    while (nextElements.isNotEmpty()) {
+        val currentElement = nextElements.remove()
+
+        print(currentElement.element.toString() + " ")
+        result.add(currentElement.element)
+
+        currentElement.left?.let { nextElements.add(it) }
+        currentElement.right?.let { nextElements.add(it) }
+
+    }
+    return result
 }
